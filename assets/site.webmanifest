@@ -1,0 +1,9 @@
+{
+  "name": "Денежный архетип",
+  "short_name": "Архетип",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#100d14",
+  "theme_color": "#100d14",
+  "description": "Бесплатный тест: узнай свой денежный архетип и подходящий стиль онлайн-заработка."
+}

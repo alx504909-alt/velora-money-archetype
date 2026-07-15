@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Денежный архетип — бесплатный тест Velora</title>
+  <meta name="description" content="Пройди короткий тест Velora и узнай, через какой стиль тебе проще зарабатывать онлайн: идеи, знания, общение, система, практика или интуиция." />
+  <meta name="theme-color" content="#100d14" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Денежный архетип — бесплатный тест" />
+  <meta property="og:description" content="10 вопросов, 6 архетипов и первый шаг к онлайн-доходу без хаоса." />
+  <meta property="og:image" content="assets/hero-visual.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="assets/site.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="#top" aria-label="Velora">Velora</a>
+    <nav aria-label="Навигация">
+      <a href="#how">Как работает</a>
+      <a href="#quiz">Тест</a>
+      <a href="#offer-preview">PDF</a>
+    </nav>
+    <a class="nav-cta" href="#quiz">Пройти тест</a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Бесплатный тест · 10 вопросов · 3 минуты</p>
+        <h1>Узнай свой денежный архетип</h1>
+        <p class="lead">Пойми, через какой стиль тебе проще двигаться к онлайн-доходу: идеи, знания, общение, система, практика или интуиция.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#quiz">Пройти бесплатный тест</a>
+          <span class="trust-line">Без регистрации, давления и обещаний «лёгких денег» — только ясность и первый шаг.</span>
+        </div>
+        <div class="proof-row" aria-label="Что внутри теста">
+          <span>6 архетипов</span>
+          <span>Результат сразу</span>
+          <span>Без регистрации</span>
+          <span>PDF за 199 ₽</span>
+        </div>
+      </div>
+      <div class="hero-card hero-image-card">
+        <img src="assets/hero-visual.png" alt="Атмосферный визуал теста Денежный архетип" />
+        <div class="hero-badge">Velora test</div>
+        <p>Тест покажет твой сильный способ движения к онлайн-доходу и первый шаг без хаоса.</p>
+      </div>
+    </section>
+
+    <section id="how" class="section grid-2">
+      <div>
+        <p class="eyebrow">Путь за 3 минуты</p>
+        <h2>Сначала бесплатный результат, потом — глубже</h2>
+        <p class="section-lead">Мы не показываем оплату до пользы. Сначала ты проходишь тест и получаешь понятную расшифровку своего архетипа.</p>
+      </div>
+      <div class="steps">
+        <div><span>1</span> Ответь на 10 коротких вопросов</div>
+        <div><span>2</span> Получи свой денежный архетип</div>
+        <div><span>3</span> Увидь подходящие онлайн-направления</div>
+        <div><span>4</span> Если откликнется — забери PDF-карту за 199 ₽</div>
+      </div>
+    </section>
+
+    <section id="offer-preview" class="section offer-preview">
+      <div>
+        <p class="eyebrow">Что будет в PDF</p>
+        <h2>Карта архетипа без лишней мистики</h2>
+      </div>
+      <div class="preview-cards">
+        <article>
+          <h3>Твои сильные деньги</h3>
+          <p>Где тебе проще создавать ценность и за что люди могут платить.</p>
+        </article>
+        <article>
+          <h3>Ошибки и блоки</h3>
+          <p>Что чаще всего тормозит твой стиль заработка и как не застрять.</p>
+        </article>
+        <article>
+          <h3>План на 7 дней</h3>
+          <p>Первый маленький шаг, чтобы не остаться в теории.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="quiz" class="section quiz-shell">
+      <div id="start-screen" class="panel">
+        <p class="eyebrow">Старт</p>
+        <h2>Готов узнать свой архетип?</h2>
+        <p>Выбирай вариант, который больше похож на тебя. Здесь нет правильных ответов — важнее честный отклик.</p>
+        <button class="button primary" id="startBtn">Начать тест</button>
+      </div>
+
+      <div id="question-screen" class="panel hidden">
+        <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
+        <p class="eyebrow" id="questionCount"></p>
+        <h2 id="questionText"></h2>
+        <div id="answers" class="answers"></div>
+      </div>
+
+      <div id="result-screen" class="panel hidden">
+        <p class="eyebrow">Твой результат</p>
+        <h2 id="resultTitle"></h2>
+        <p id="resultSummary" class="result-summary"></p>
+        <div class="result-grid">
+          <div><h3>Тебе подходит</h3><ul id="resultFits"></ul></div>
+          <div><h3>Где деньги</h3><p id="resultMoney"></p></div>
+          <div><h3>Риск</h3><p id="resultRisk"></p></div>
+          <div><h3>Первый шаг</h3><p id="resultStep"></p></div>
+        </div>
+        <div id="offer" class="offer">
+          <div class="offer-top">
+            <p class="eyebrow">Полный разбор</p>
+            <div class="price">199 ₽</div>
+          </div>
+          <h3>Хочешь PDF-карту своего архетипа?</h3>
+          <p>Внутри: сильные стороны, подходящие онлайн-направления, частые ошибки, идеи мини-продуктов и план на 7 дней.</p>
+          <button class="button primary" id="buyBtn" data-event="pdf_interest">Получить PDF за 199 ₽</button>
+          <p class="micro">Сейчас открыта ранняя версия: кнопка показывает интерес к PDF. Оплату и автоматическую выдачу подключим после первой проверки спроса.</p>
+        </div>
+        <button class="button ghost" id="restartBtn">Пройти заново</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal hidden" id="interestModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button class="modal-close" id="closeModal" aria-label="Закрыть">×</button>
+      <p class="eyebrow">Интерес зафиксирован</p>
+      <h2 id="modalTitle">PDF-карта почти готова</h2>
+      <p>Спасибо — это помогает понять, нужен ли полный разбор. На следующем шаге откроем оплату и автоматическую выдачу PDF.</p>
+      <div class="modal-note">
+        <strong>Что будет внутри:</strong> твой стиль заработка, риски, подходящие онлайн-направления и план на 7 дней.
+      </div>
+      <button class="button primary" id="modalOk">Понятно</button>
+    </div>
+  </div>
+
+  <footer>Velora · Денежный архетип · ранняя версия</footer>
+  <script src="app.js"></script>
+</body>
+</html>
