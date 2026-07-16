@@ -118,7 +118,7 @@
           <h3>Хочешь PDF-карту своего архетипа?</h3>
           <p>Внутри: сильные стороны, подходящие онлайн-направления, частые ошибки, идеи мини-продуктов и план на 7 дней.</p>
           <button class="button primary" id="buyBtn" data-event="pdf_interest">Получить PDF за 199 ₽</button>
-          <p class="micro">Сейчас открыта ранняя версия: кнопка показывает интерес к PDF. Оплату и автоматическую выдачу подключим после первой проверки спроса.</p>
+          <p class="micro">После подключения оплаты кнопка будет вести на платёжную страницу. После успешной оплаты откроется страница скачивания PDF.</p>
         </div>
         <button class="button ghost" id="restartBtn">Пройти заново</button>
       </div>
@@ -128,9 +128,9 @@
   <div class="modal hidden" id="interestModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal-card">
       <button class="modal-close" id="closeModal" aria-label="Закрыть">×</button>
-      <p class="eyebrow">Интерес зафиксирован</p>
-      <h2 id="modalTitle">PDF-карта почти готова</h2>
-      <p>Спасибо — это помогает понять, нужен ли полный разбор. На следующем шаге откроем оплату и автоматическую выдачу PDF.</p>
+      <p class="eyebrow">Оплата скоро будет подключена</p>
+      <h2 id="modalTitle">PDF-карта уже подготовлена</h2>
+      <p>Следующий шаг — создать платёжную ссылку на 199 ₽ и подключить её к кнопке. После оплаты покупатель попадёт на страницу скачивания PDF.</p>
       <div class="modal-note">
         <strong>Что будет внутри:</strong> твой стиль заработка, риски, подходящие онлайн-направления и план на 7 дней.
       </div>
@@ -138,7 +138,15 @@
     </div>
   </div>
 
-  <footer>Velora · Денежный архетип · ранняя версия</footer>
+<footer class="site-footer">
+    <div>Velora · Денежный архетип · цифровой PDF-продукт</div>
+    <div class="footer-links">
+      <a href="requisites.html">Реквизиты</a>
+      <a href="offer.html">Оферта</a>
+      <a href="privacy.html">Политика конфиденциальности</a>
+      <a href="delivery.html">Получение заказа</a>
+    </div>
+  </footer>
   <script src="app.js"></script>
 </body>
 </html>

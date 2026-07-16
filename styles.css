@@ -117,3 +117,17 @@ footer{padding:34px 6vw 46px;color:var(--muted);text-align:center;border-top:1px
   .hero-actions{align-items:stretch}.hero-image-card p{padding:0 24px 24px;font-size:17px}.hero-badge{top:18px;right:18px}
   .price{font-size:38px}
 }
+
+.footer-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.footer-links a{color:var(--gold)}
+.footer-links a:hover{color:var(--text)}
+.legal-page{padding:58px 6vw 70px;max-width:1040px;margin:0 auto}
+.legal-panel h1{font-size:clamp(40px,5vw,64px);line-height:1;margin:10px 0 18px}
+.legal-panel h2{font-size:clamp(24px,3vw,34px);margin-top:30px}
+.legal-panel a{color:var(--gold);text-decoration:underline;text-underline-offset:4px}
+.requisites-list{display:grid;grid-template-columns:minmax(190px,.38fr) 1fr;gap:0;border:1px solid var(--line);border-radius:24px;overflow:hidden;margin:28px 0;background:rgba(255,255,255,.035)}
+.requisites-list dt,.requisites-list dd{padding:16px 18px;border-bottom:1px solid var(--line);margin:0}
+.requisites-list dt{color:var(--gold);font-weight:800;background:rgba(216,174,98,.06)}
+.requisites-list dd{color:#eadbcf}
+.requisites-list dt:last-of-type,.requisites-list dd:last-of-type{border-bottom:0}
+@media(max-width:620px){.requisites-list{grid-template-columns:1fr}.requisites-list dt{border-bottom:0;padding-bottom:6px}.requisites-list dd{padding-top:0}.legal-page{padding-left:5vw;padding-right:5vw}}
