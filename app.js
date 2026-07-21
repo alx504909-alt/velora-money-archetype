@@ -1,7 +1,7 @@
 // Вставь сюда платёжную ссылку ЮKassa, когда она будет готова.
 // В ЮKassa нужно поставить Success/Return URL:
 // https://alx504909-alt.github.io/velora-money-archetype/success.html
-const PAYMENT_URL = '';
+const PAYMENT_URL = 'https://yookassa.ru/my/i/al9lXdOSJCyY/l';
 
 const EMPTY_SCORES = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0 };
 
