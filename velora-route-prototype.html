@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Velora — прототип маршрута архетипа</title>
+  <meta name="description" content="Отдельный прототип scroll-route анимации Velora: путь рабочего архетипа при прокрутке." />
+  <meta name="theme-color" content="#f6efe5" />
+  <link rel="stylesheet" href="velora-route-prototype.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="route-progress" id="routeProgress" aria-hidden="true"></div>
+  <div class="route-hud" id="routeHud">Маршрут не начат</div>
+  <main id="story">
+    <section class="intro section" data-step="0">
+      <div class="intro-copy">
+        <p class="eyebrow">Velora route prototype</p>
+        <h1>Путь к твоему рабочему архетипу</h1>
+        <p>Листай вниз: световой маркер проходит внутренний маршрут — от первого импульса до карты действий.</p>
+        <a href="#route" class="scroll-link">Начать маршрут <span>↓</span></a>
+      </div>
+    </section>
+
+    <section id="route" class="route-story" aria-label="Маршрут рабочего архетипа Velora">
+      <div class="route-stage">
+        <div class="route-map" aria-hidden="true">
+          <div class="map-paper"></div>
+          <div class="constellation c1">✦</div>
+          <div class="constellation c2">✧</div>
+          <div class="constellation c3">✦</div>
+          <div class="map-label label-a">энергия</div>
+          <div class="map-label label-b">решение</div>
+          <div class="map-label label-c">тень</div>
+          <div class="map-label label-d">архетип</div>
+          <div class="map-label label-e">действие</div>
+
+          <svg class="route-svg" viewBox="0 0 1200 760" fill="none">
+            <path class="route-base" d="M118 590 C220 455 182 250 366 182 C548 114 710 178 790 306 C878 446 745 562 592 510 C430 455 445 306 608 252 C784 194 966 284 1032 458 C1072 566 1010 636 900 642" />
+            <path class="route-done" id="routeDone" d="M118 590 C220 455 182 250 366 182 C548 114 710 178 790 306 C878 446 745 562 592 510 C430 455 445 306 608 252 C784 194 966 284 1032 458 C1072 566 1010 636 900 642" />
+          </svg>
+
+          <button class="stop active" data-step="0" style="--x:9.8%;--y:77.6%"><b>01</b><span>Импульс</span></button>
+          <button class="stop" data-step="1" style="--x:30.5%;--y:23.9%"><b>02</b><span>Выбор</span></button>
+          <button class="stop" data-step="2" style="--x:65.8%;--y:40.2%"><b>03</b><span>Тень</span></button>
+          <button class="stop" data-step="3" style="--x:50.7%;--y:66.9%"><b>04</b><span>Архетип</span></button>
+          <button class="stop" data-step="4" style="--x:75%;--y:84.5%"><b>05</b><span>Карта</span></button>
+
+          <div class="traveler" id="traveler">
+            <span class="traveler-core">V</span>
+            <span class="traveler-aura"></span>
+          </div>
+        </div>
+
+        <aside class="route-panel" id="routePanel">
+          <p class="eyebrow" id="panelKicker">Остановка 01</p>
+          <h2 id="panelTitle">Импульс</h2>
+          <p id="panelText">Сначала человек чувствует: обычные советы по работе и деньгам ему не подходят. Нужен свой маршрут.</p>
+          <div class="panel-tags" id="panelTags">
+            <span>энергия</span><span>интерес</span><span>первый отклик</span>
+          </div>
+        </aside>
+      </div>
+
+      <div class="chapters">
+        <article class="chapter active" data-step="0">
+          <span>Остановка 01</span><em>01 / импульс</em>
+          <h3>Что тебя запускает?</h3>
+          <p>Маршрут начинается не с анкеты, а с ощущения: “у меня есть свой способ создавать ценность”.</p>
+        </article>
+        <article class="chapter" data-step="1">
+          <span>Остановка 02</span><em>02 / выбор</em>
+          <h3>Как ты выбираешь путь?</h3>
+          <p>Ответы в тесте становятся точками маршрута: человек видит, что диагностика собирается из его решений.</p>
+        </article>
+        <article class="chapter" data-step="2">
+          <span>Остановка 03</span><em>03 / тень</em>
+          <h3>Где ты теряешь энергию?</h3>
+          <p>Сильный тест показывает не только “красивую сторону”, но и место, где человек буксует.</p>
+        </article>
+        <article class="chapter" data-step="3">
+          <span>Остановка 04</span><em>04 / архетип</em>
+          <h3>Какой архетип проявился?</h3>
+          <p>В этот момент появляется узнавание: не ярлык, а рабочий сценарий — как человеку легче действовать.</p>
+        </article>
+        <article class="chapter" data-step="4">
+          <span>Финиш маршрута</span><em>05 / карта</em>
+          <h3>Что делать дальше?</h3>
+          <p>PDF становится не внезапной продажей, а полной картой: направления, риски, идеи продуктов и первый план.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="outro section">
+      <div>
+        <p class="eyebrow">Следующий шаг</p>
+        <h2>Если механика нравится — переносим аккуратно в хороший v9</h2>
+        <p>Это отдельный прототип. Основной сайт не трогаем, пока не выберем визуальный принцип маршрута.</p>
+      </div>
+    </section>
+  </main>
+  <script src="velora-route-prototype.js"></script>
+</body>
+</html>

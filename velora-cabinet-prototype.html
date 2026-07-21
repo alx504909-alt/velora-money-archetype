@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Velora — кабинет архетипа</title>
+  <meta name="description" content="Отдельный прототип вау-сцены Velora: кабинет, стол с картами и раскрытие рабочего архетипа при прокрутке." />
+  <meta name="theme-color" content="#f3e8d8" />
+  <link rel="stylesheet" href="velora-cabinet-prototype.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+  <nav class="step-rail" id="stepRail" aria-label="Навигация по главам">
+    <button data-step="0" class="active"><b>01</b><span>Импульс</span></button>
+    <button data-step="1"><b>02</b><span>Выбор</span></button>
+    <button data-step="2"><b>03</b><span>Тень</span></button>
+    <button data-step="3"><b>04</b><span>Архетип</span></button>
+    <button data-step="4"><b>05</b><span>Карта</span></button>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">Velora cabinet prototype</p>
+      <h1>Открой карту своего рабочего архетипа</h1>
+      <p>Не маршрут по Европе, а путешествие по внутреннему столу Velora: карты, заметки, печати и артефакты раскрываются при скролле.</p>
+      <a href="#cabinet" class="button">Войти в кабинет <span>↓</span></a>
+    </section>
+
+    <section id="cabinet" class="cabinet-story">
+      <div class="story-boundary start">Начало маршрута</div>
+      <div class="story-boundary end">Финал маршрута</div>
+      <div class="cabinet-stage">
+        <div class="scene" id="scene">
+          <div class="lamp" aria-hidden="true"></div>
+          <div class="table" aria-hidden="true">
+            <div class="paper sheet-back"></div>
+            <div class="paper sheet-mid"></div>
+            <div class="archetype-card" id="archetypeCard">
+              <div class="card-topline" id="cardTopline">Открытие 01</div>
+              <div class="card-symbol" id="cardSymbol">✦</div>
+              <h2 id="cardTitle">Импульс</h2>
+              <p id="cardText">Что тебя запускает: идея, контакт, система, действие или ощущение смысла?</p>
+              <div class="card-lines"><i></i><i></i><i></i></div>
+            </div>
+            <div class="note note-one" id="noteOne">энергия → первый отклик</div>
+            <div class="note note-two" id="noteTwo">решение → рабочий стиль</div>
+            <div class="stamp" id="stamp">VELORA</div>
+            <div class="compass" id="compass"><span></span></div>
+            <div class="thread"><span></span></div>
+          </div>
+        </div>
+
+        <aside class="panel" id="panel">
+          <p class="eyebrow" id="panelKicker">Глава 01</p>
+          <h3 id="panelTitle">Сначала — импульс</h3>
+          <p id="panelText">Человек не читает сухое описание. Он как будто заглядывает на стол, где постепенно проявляется его карта работы.</p>
+          <div class="chips" id="chips"><span>интерес</span><span>энергия</span><span>начало</span></div>
+          <div class="continue-hint" id="continueHint">Листай дальше · 1 из 5</div>
+        </aside>
+      </div>
+
+      <div class="scroll-anchors" aria-hidden="true">
+        <section data-step="0"></section>
+        <section data-step="1"></section>
+        <section data-step="2"></section>
+        <section data-step="3"></section>
+        <section data-step="4"></section>
+      </div>
+    </section>
+
+    <section class="outro">
+      <p class="eyebrow">Идея</p>
+      <h2>Если это направление нравится — делаем из него один сильный блок для v9</h2>
+      <p>Этот файл — отдельный безопасный прототип. Основной сайт не изменён.</p>
+    </section>
+  </main>
+
+  <script src="velora-cabinet-prototype.js"></script>
+</body>
+</html>
