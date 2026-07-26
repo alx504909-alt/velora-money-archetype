@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PDF-карта готова — Velora</title>
-  <meta name="description" content="Страница получения персонального PDF-разбора Денежный архетип Velora после оплаты." />
+  <meta name="description" content="Страница получения персонального PDF-разбора Velora после оплаты." />
   <meta name="theme-color" content="#100d14" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
@@ -17,7 +17,7 @@
       <a href="index.html#quiz">Тест</a>
       <a href="index.html#offer-preview">PDF</a>
     </nav>
-    <a class="nav-cta" href="index.html#quiz">Пройти тест</a>
+    <a class="nav-cta" href="index.html#quiz">Вернуться к тесту</a>
   </header>
 
   <main id="top">
@@ -25,35 +25,39 @@
       <div class="hero-copy">
         <p class="eyebrow">Оплата прошла</p>
         <h1>Твоя PDF-карта готова</h1>
-        <p class="lead" id="successLead">Скачай персональный PDF-разбор по своему результату теста. Если файл не определился автоматически — выбери свой архетип ниже.</p>
-        <div class="hero-actions">
-          <a class="button primary" id="downloadPrimary" href="#choosePdfTitle">Выбрать свой PDF ниже</a>
+        <p class="lead" id="successLead">Сейчас сайт проверит результат теста в этом браузере и покажет только твой PDF.</p>
+        <div class="hero-actions" id="successActions">
+          <a class="button primary" id="downloadPrimary" href="#" aria-disabled="true">Проверяем результат…</a>
           <a class="button ghost" href="index.html#quiz">Вернуться к тесту</a>
         </div>
         <div class="proof-row" aria-label="Что внутри PDF">
-          <span>9 страниц</span>
           <span>личный архетип</span>
           <span>3 идеи</span>
+          <span>риски</span>
           <span>план на 7 дней</span>
         </div>
       </div>
-      <div class="hero-card">
-        <p><strong>Важно:</strong><br>если после оплаты открылся другой браузер, сайт может не помнить твой результат. Это не ошибка оплаты — просто выбери свой архетип ниже или пройди тест ещё раз.</p>
+      <div class="hero-card" id="successHelp">
+        <p><strong>Важно:</strong><br>на этой странице больше нельзя скачать все архетипы. Если результат не сохранился после оплаты, вернись к тесту или напиши нам — отправим правильный файл вручную после проверки оплаты.</p>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="choosePdfTitle">
+    <section class="section" aria-labelledby="whatNextTitle">
       <div class="section-heading">
-        <p class="eyebrow">Выбор файла</p>
-        <h2 id="choosePdfTitle">PDF по архетипам</h2>
-        <p>Выбери архетип, который был показан в бесплатном результате. Если не помнишь — нажми «Вернуться к тесту» и пройди его ещё раз, это займёт около 3 минут.</p>
+        <p class="eyebrow">Если файл не появился</p>
+        <h2 id="whatNextTitle">Что делать</h2>
+        <p>Иногда платёжная страница открывается в другом браузере, и сайт не видит результат теста. Это не меняет оплату — просто нужен правильный архетип.</p>
       </div>
-      <div class="cards-grid" id="pdfGrid"></div>
+      <div class="preview-cards">
+        <article><h3>1. Вернись к тесту</h3><p>Пройди тест ещё раз в этом же браузере и нажми кнопку получения PDF после результата.</p></article>
+        <article><h3>2. Напиши нам</h3><p>Если уже оплатил(а), пришли результат или чек — мы отправим нужный PDF вручную.</p></article>
+        <article><h3>3. Не выбирай наугад</h3><p>Файл должен совпадать с архетипом, который был показан в результате теста.</p></article>
+      </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div>Velora · Денежный архетип · цифровой PDF-продукт</div>
+    <div>Velora · цифровой PDF-продукт</div>
     <div class="footer-links">
       <a href="requisites.html">Реквизиты</a>
       <a href="offer.html">Оферта</a>
@@ -64,32 +68,34 @@
 
 <script>
 const pdfs = {
-  creator: ['Создатель', 'assets/pdf/velora-creator.pdf', 'идеи, визуал, упаковка, цифровой продукт'],
-  expert: ['Эксперт', 'assets/pdf/velora-expert.pdf', 'знания, структура, объяснение, доверие'],
-  communicator: ['Коммуникатор', 'assets/pdf/velora-communicator.pdf', 'внимание, тексты, аудитория, продвижение'],
-  analyst: ['Аналитик', 'assets/pdf/velora-analyst.pdf', 'логика, системы, таблицы, автоматизации'],
-  practitioner: ['Практик', 'assets/pdf/velora-practitioner.pdf', 'действие, настройка, запуск, готовый результат'],
-  intuitive: ['Интуит', 'assets/pdf/velora-intuitive.pdf', 'смыслы, узнавание, атмосфера, персональные разборы']
+  creator: ['Создатель', 'assets/pdf/velora-creator.pdf'],
+  expert: ['Эксперт', 'assets/pdf/velora-expert.pdf'],
+  communicator: ['Коммуникатор', 'assets/pdf/velora-communicator.pdf'],
+  analyst: ['Аналитик', 'assets/pdf/velora-analyst.pdf'],
+  practitioner: ['Практик', 'assets/pdf/velora-practitioner.pdf'],
+  intuitive: ['Интуит', 'assets/pdf/velora-intuitive.pdf']
 };
 const selected = localStorage.getItem('velora_selected_pdf');
 const selectedName = localStorage.getItem('velora_selected_pdf_name');
 const primary = document.getElementById('downloadPrimary');
 const lead = document.getElementById('successLead');
+const help = document.getElementById('successHelp');
+
 if (selected && pdfs[selected]) {
-  primary.href = pdfs[selected][1];
+  const [name, url] = pdfs[selected];
+  primary.href = url;
   primary.setAttribute('download', '');
-  primary.textContent = `Скачать PDF: ${pdfs[selected][0]}`;
-  lead.textContent = `Мы определили твой результат: “${pdfs[selected][0]}”. Скачай PDF с расшифровкой, рисками, идеями мини-продукта и планом на 7 дней.`;
-} else if (selectedName) {
-  lead.textContent = `Если файл не определился автоматически, выбери ниже свой архетип: ${selectedName}.`;
+  primary.removeAttribute('aria-disabled');
+  primary.textContent = `Скачать PDF: ${name}`;
+  lead.textContent = `Мы определили твой результат: “${name}”. Ниже доступен только PDF, который соответствует этому архетипу.`;
+  help.innerHTML = `<p><strong>Проверь перед скачиванием:</strong><br>название на кнопке должно совпадать с архетипом, который был показан в результате теста.</p>`;
+} else {
+  primary.href = 'index.html#quiz';
+  primary.textContent = 'Вернуться к тесту';
+  lead.textContent = selectedName
+    ? `Результат не определился автоматически. Последний сохранённый результат: “${selectedName}”. Вернись к тесту или напиши нам — отправим нужный PDF вручную.`
+    : 'Результат теста не сохранился в этом браузере. Чтобы не выдать неправильный PDF, автоматическое скачивание скрыто.';
 }
-const grid = document.getElementById('pdfGrid');
-Object.entries(pdfs).forEach(([key, [name, url, hint]]) => {
-  const card = document.createElement('article');
-  card.className = 'mini-card';
-  card.innerHTML = `<h3>${name}</h3><p>${hint}</p><a class="button ghost" href="${url}" download>Скачать PDF</a>`;
-  grid.appendChild(card);
-});
 </script>
 </body>
 </html>
