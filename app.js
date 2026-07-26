@@ -365,9 +365,17 @@ function showResult() {
 async function recordInterest() {
   const resultKey = currentResult && currentResult.key ? currentResult.key : '';
   const resultName = currentResult ? currentResult.name : 'unknown';
+  const buyerEmail = (document.getElementById('buyerEmail')?.value || '').trim();
+  if (!buyerEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(buyerEmail)) {
+    showPaymentIssue('Введите email — он нужен для чека ЮKassa и восстановления доступа к PDF, если браузер потеряет результат.');
+    document.getElementById('buyerEmail')?.focus();
+    return;
+  }
+
   const payload = {
     result: resultName,
     resultKey,
+    buyerEmail,
     scores,
     clickedAt: new Date().toISOString(),
     price: 199,
@@ -398,7 +406,7 @@ async function recordInterest() {
     const response = await fetch(PAYMENT_API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ resultKey, resultName, amount: 199 })
+      body: JSON.stringify({ resultKey, resultName, buyerEmail, amount: 199 })
     });
     const data = await response.json().catch(() => ({}));
 

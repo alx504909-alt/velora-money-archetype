@@ -39,8 +39,9 @@ https://velora-money-archetype.vercel.app
 ## Что делает функция
 
 1. Получает архетип из сайта: `creator`, `expert`, `communicator`, `analyst`, `practitioner`, `intuitive`.
-2. Создаёт платёж в ЮKassa на 199 ₽.
-3. Ставит `return_url` строго под этот архетип:
+2. Получает email покупателя — он нужен ЮKassa для чека и нужен Velora для ручного восстановления файла при сбое.
+3. Создаёт платёж в ЮKassa на 199 ₽ с объектом `receipt`.
+4. Ставит `return_url` строго под этот архетип:
 
 ```text
 /success.html?pdf=creator

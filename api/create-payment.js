@@ -49,9 +49,15 @@ module.exports = async function handler(req, res) {
 
   const resultKey = String(body.resultKey || '').trim();
   const resultName = ARCHETYPES[resultKey];
+  const buyerEmail = String(body.buyerEmail || '').trim().toLowerCase();
 
   if (!resultName) {
     json(res, 400, { error: 'invalid_result_key' });
+    return;
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(buyerEmail)) {
+    json(res, 400, { error: 'invalid_buyer_email' });
     return;
   }
 
@@ -70,10 +76,29 @@ module.exports = async function handler(req, res) {
       return_url: returnUrl
     },
     description: `Velora — PDF-разбор: ${resultName}`,
+    receipt: {
+      customer: {
+        email: buyerEmail
+      },
+      items: [
+        {
+          description: `Velora — PDF-разбор: ${resultName}`,
+          quantity: '1.00',
+          amount: {
+            value: '199.00',
+            currency: 'RUB'
+          },
+          vat_code: 1,
+          payment_subject: 'service',
+          payment_mode: 'full_payment'
+        }
+      ]
+    },
     metadata: {
       product: 'velora_pdf',
       resultKey,
-      resultName
+      resultName,
+      buyerEmail
     }
   };
 
