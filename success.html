@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PDF-карта готова — Velora</title>
-  <meta name="description" content="Страница получения PDF-карты Денежный архетип Velora после оплаты." />
+  <meta name="description" content="Страница получения персонального PDF-разбора Денежный архетип Velora после оплаты." />
   <meta name="theme-color" content="#100d14" />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
@@ -25,24 +25,33 @@
       <div class="hero-copy">
         <p class="eyebrow">Оплата прошла</p>
         <h1>Твоя PDF-карта готова</h1>
-        <p class="lead">Скачай оплаченный PDF-файл “Денежный архетип”. Внутри — 6 стилей онлайн-заработка, риски, подходящие направления и план на 7 дней.</p>
+        <p class="lead" id="successLead">Скачай персональный PDF-разбор по своему денежному архетипу: сильные стороны, риски, подходящие онлайн-форматы, идеи мини-продукта и план на 7 дней.</p>
         <div class="hero-actions">
-          <a class="button primary" href="assets/velora-money-archetype.pdf" download>Скачать PDF</a>
+          <a class="button primary" id="downloadPrimary" href="assets/pdf/velora-creator.pdf" download>Скачать мой PDF</a>
           <a class="button ghost" href="index.html#quiz">Вернуться к тесту</a>
         </div>
         <div class="proof-row" aria-label="Что внутри PDF">
-          <span>10 страниц</span>
-          <span>6 архетипов</span>
-          <span>План на 7 дней</span>
+          <span>9 страниц</span>
+          <span>персональный архетип</span>
+          <span>план на 7 дней</span>
         </div>
       </div>
       <div class="hero-card">
-        <p><strong>Как использовать:</strong><br>найди свой архетип из результата теста, прочитай сильные стороны и выбери один первый шаг. Не пытайся делать всё сразу.</p>
+        <p><strong>Если открылся не тот файл:</strong><br>выбери свой архетип ниже. Если не помнишь результат — вернись к тесту и пройди его ещё раз.</p>
       </div>
+    </section>
+
+    <section class="section" aria-labelledby="choosePdfTitle">
+      <div class="section-heading">
+        <p class="eyebrow">Выбор файла</p>
+        <h2 id="choosePdfTitle">PDF по архетипам</h2>
+        <p>На случай, если платёжная страница открылась в другом браузере и результат теста не сохранился автоматически.</p>
+      </div>
+      <div class="cards-grid" id="pdfGrid"></div>
     </section>
   </main>
 
-<footer class="site-footer">
+  <footer class="site-footer">
     <div>Velora · Денежный архетип · цифровой PDF-продукт</div>
     <div class="footer-links">
       <a href="requisites.html">Реквизиты</a>
@@ -51,5 +60,34 @@
       <a href="delivery.html">Получение заказа</a>
     </div>
   </footer>
+
+<script>
+const pdfs = {
+  creator: ['Создатель', 'assets/pdf/velora-creator.pdf'],
+  expert: ['Эксперт', 'assets/pdf/velora-expert.pdf'],
+  communicator: ['Коммуникатор', 'assets/pdf/velora-communicator.pdf'],
+  analyst: ['Аналитик', 'assets/pdf/velora-analyst.pdf'],
+  practitioner: ['Практик', 'assets/pdf/velora-practitioner.pdf'],
+  intuitive: ['Интуит', 'assets/pdf/velora-intuitive.pdf']
+};
+const selected = localStorage.getItem('velora_selected_pdf');
+const selectedName = localStorage.getItem('velora_selected_pdf_name');
+const primary = document.getElementById('downloadPrimary');
+const lead = document.getElementById('successLead');
+if (selected && pdfs[selected]) {
+  primary.href = pdfs[selected][1];
+  primary.textContent = `Скачать PDF: ${pdfs[selected][0]}`;
+  lead.textContent = `Скачай персональный PDF-разбор “${pdfs[selected][0]}”: сильные стороны, риски, подходящие онлайн-форматы, идеи мини-продукта и план на 7 дней.`;
+} else if (selectedName) {
+  lead.textContent = `Если файл не определился автоматически, выбери ниже свой архетип: ${selectedName}.`;
+}
+const grid = document.getElementById('pdfGrid');
+Object.entries(pdfs).forEach(([key, [name, url]]) => {
+  const card = document.createElement('article');
+  card.className = 'mini-card';
+  card.innerHTML = `<h3>${name}</h3><p>Персональный PDF-разбор по архетипу.</p><a class="button ghost" href="${url}" download>Скачать</a>`;
+  grid.appendChild(card);
+});
+</script>
 </body>
 </html>
