@@ -1,0 +1,12 @@
+{
+  "name": "velora-money-archetype",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Velora static quiz funnel with YooKassa serverless payment creation.",
+  "scripts": {
+    "check": "node --check api/create-payment.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

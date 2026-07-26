@@ -1,24 +1,8 @@
-// Финальная схема ЮKassa для статического MVP:
-// создать 6 отдельных платёжных ссылок — по одной на каждый архетип.
-// В каждой ссылке поставить свой Success/Return URL:
-// https://alx504909-alt.github.io/velora-money-archetype/success.html?pdf=creator
-// https://alx504909-alt.github.io/velora-money-archetype/success.html?pdf=expert
-// https://alx504909-alt.github.io/velora-money-archetype/success.html?pdf=communicator
-// https://alx504909-alt.github.io/velora-money-archetype/success.html?pdf=analyst
-// https://alx504909-alt.github.io/velora-money-archetype/success.html?pdf=practitioner
-// https://alx504909-alt.github.io/velora-money-archetype/success.html?pdf=intuitive
-const PAYMENT_URLS = {
-  creator: '',
-  expert: '',
-  communicator: '',
-  analyst: '',
-  practitioner: '',
-  intuitive: ''
-};
-
-// Временный fallback: старая общая ссылка. Она хуже, потому что не знает архетип.
-// Как только будут 6 ссылок выше — очистить FALLBACK_PAYMENT_URL.
-const FALLBACK_PAYMENT_URL = 'https://yookassa.ru/my/i/al9lXdOSJCyY/l';
+// Безопасная схема оплаты:
+// сайт отправляет выбранный архетип на backend, backend создаёт платёж ЮKassa
+// и ставит return_url вида success.html?pdf=<архетип>.
+// На GitHub Pages backend не работает; для продаж нужен Vercel/другой backend-хостинг.
+const PAYMENT_API_URL = '/api/create-payment';
 
 const EMPTY_SCORES = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0 };
 
@@ -378,9 +362,12 @@ function showResult() {
   $('result-screen').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function recordInterest() {
+async function recordInterest() {
+  const resultKey = currentResult && currentResult.key ? currentResult.key : '';
+  const resultName = currentResult ? currentResult.name : 'unknown';
   const payload = {
-    result: currentResult ? currentResult.name : 'unknown',
+    result: resultName,
+    resultKey,
     scores,
     clickedAt: new Date().toISOString(),
     price: 199,
@@ -393,21 +380,48 @@ function recordInterest() {
   previous.push(payload);
   localStorage.setItem(key, JSON.stringify(previous));
   console.log('PDF interest:', payload);
-  if (currentResult && currentResult.key) {
-    localStorage.setItem('velora_selected_pdf', currentResult.key);
-    localStorage.setItem('velora_selected_pdf_name', currentResult.name);
-  }
 
-  const paymentUrl = currentResult && currentResult.key
-    ? (PAYMENT_URLS[currentResult.key] || FALLBACK_PAYMENT_URL)
-    : FALLBACK_PAYMENT_URL;
-
-  if (paymentUrl) {
-    window.location.href = paymentUrl;
+  if (!resultKey) {
+    showPaymentIssue('Не удалось определить результат теста. Пройди тест ещё раз — так мы не выдадим неправильный PDF.');
     return;
   }
 
-  $('interestModal').classList.remove('hidden');
+  localStorage.setItem('velora_selected_pdf', resultKey);
+  localStorage.setItem('velora_selected_pdf_name', resultName);
+
+  const buyBtn = $('buyBtn');
+  const previousText = buyBtn.textContent;
+  buyBtn.disabled = true;
+  buyBtn.textContent = 'Открываем оплату…';
+
+  try {
+    const response = await fetch(PAYMENT_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ resultKey, resultName, amount: 199 })
+    });
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok || !data.confirmationUrl) {
+      throw new Error(data.description || data.error || 'payment_api_failed');
+    }
+
+    window.location.href = data.confirmationUrl;
+  } catch (error) {
+    console.error('Payment error:', error);
+    buyBtn.disabled = false;
+    buyBtn.textContent = previousText;
+    showPaymentIssue('Оплата временно не открылась. Мы уже готовим безопасную оплату через ЮKassa. Если ты уже оплатил(а), напиши нам — отправим нужный PDF вручную.');
+  }
+}
+
+function showPaymentIssue(message) {
+  const modal = $('interestModal');
+  const title = $('modalTitle');
+  const text = document.getElementById('modalText');
+  if (title) title.textContent = 'Оплата временно недоступна';
+  if (text) text.textContent = message;
+  modal.classList.remove('hidden');
 }
 
 function closeModal() {
