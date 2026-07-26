@@ -75,7 +75,8 @@ const pdfs = {
   practitioner: ['Практик', 'assets/pdf/velora-practitioner.pdf'],
   intuitive: ['Интуит', 'assets/pdf/velora-intuitive.pdf']
 };
-const selected = localStorage.getItem('velora_selected_pdf');
+const selectedFromUrl = new URLSearchParams(window.location.search).get('pdf');
+const selected = selectedFromUrl || localStorage.getItem('velora_selected_pdf');
 const selectedName = localStorage.getItem('velora_selected_pdf_name');
 const primary = document.getElementById('downloadPrimary');
 const lead = document.getElementById('successLead');

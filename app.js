@@ -1,7 +1,24 @@
-// Вставь сюда платёжную ссылку ЮKassa, когда она будет готова.
-// В ЮKassa нужно поставить Success/Return URL:
-// https://alx504909-alt.github.io/velora-money-archetype/success.html
-const PAYMENT_URL = 'https://yookassa.ru/my/i/al9lXdOSJCyY/l';
+// Финальная схема ЮKassa для статического MVP:
+// создать 6 отдельных платёжных ссылок — по одной на каждый архетип.
+// В каждой ссылке поставить свой Success/Return URL:
+// https://alx504909-alt.github.io/velora-money-archetype/success.html?pdf=creator
+// https://alx504909-alt.github.io/velora-money-archetype/success.html?pdf=expert
+// https://alx504909-alt.github.io/velora-money-archetype/success.html?pdf=communicator
+// https://alx504909-alt.github.io/velora-money-archetype/success.html?pdf=analyst
+// https://alx504909-alt.github.io/velora-money-archetype/success.html?pdf=practitioner
+// https://alx504909-alt.github.io/velora-money-archetype/success.html?pdf=intuitive
+const PAYMENT_URLS = {
+  creator: '',
+  expert: '',
+  communicator: '',
+  analyst: '',
+  practitioner: '',
+  intuitive: ''
+};
+
+// Временный fallback: старая общая ссылка. Она хуже, потому что не знает архетип.
+// Как только будут 6 ссылок выше — очистить FALLBACK_PAYMENT_URL.
+const FALLBACK_PAYMENT_URL = 'https://yookassa.ru/my/i/al9lXdOSJCyY/l';
 
 const EMPTY_SCORES = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0 };
 
@@ -381,8 +398,12 @@ function recordInterest() {
     localStorage.setItem('velora_selected_pdf_name', currentResult.name);
   }
 
-  if (PAYMENT_URL) {
-    window.location.href = PAYMENT_URL;
+  const paymentUrl = currentResult && currentResult.key
+    ? (PAYMENT_URLS[currentResult.key] || FALLBACK_PAYMENT_URL)
+    : FALLBACK_PAYMENT_URL;
+
+  if (paymentUrl) {
+    window.location.href = paymentUrl;
     return;
   }
 
